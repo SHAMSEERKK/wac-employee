@@ -57,7 +57,9 @@
                     document.getElementById('logout-form').submit();" class="dropdown-item">
                     <i class="fas fa-sign-out-alt fa-1x mr-2"></i> Logout
                 </a>
-
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </li>
 

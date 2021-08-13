@@ -6,12 +6,13 @@ use App\Models\department;
 use App\Models\designation;
 use Illuminate\Http\Request;
 
+
 class EmployeeController extends Controller
 {
     public function add(Request $req)
     {
         $validated = $req->validate([
-            'department_name' => 'required|unique:departments,name',
+            'department_name' => 'required|max:15|unique:departments,name',
         ]);
 
         $add = new department;
@@ -39,12 +40,15 @@ class EmployeeController extends Controller
         return redirect('departments');
 
     }
-    public function delData($id)
+    public function deleteDepartment($id)
     {
-
         $data = department::findOrFail($id);
-        $data->delete();
-        return redirect('departments');
+        try{
+            $data->delete();
+        }catch(\exception $e){
+            return redirect('departments')->withErrors('OOPS..! Employee with department exist'); }
+        
+            return redirect('departments');
     }
 
 
@@ -84,7 +88,11 @@ class EmployeeController extends Controller
     {
 
         $data = designation::findOrFail($id);
-        $data->delete();
+        try{
+            $data->delete();
+        }catch(\exception $e){
+            return redirect('designations')->withErrors('OOPS..! Employee with designations exist'); }
+        
         return redirect('designations');
     }
 

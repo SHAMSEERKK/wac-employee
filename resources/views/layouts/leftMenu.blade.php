@@ -23,6 +23,14 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                {{-- lists --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('employees') }}"><i class="fas fa-list"></i>
+                        <p>
+                            Employees
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('departments') }}"><i class="fas fa-list"></i>
@@ -38,17 +46,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt fa-1x"></i>
-                        <p>
-                            logout
-                        </p>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </li>
+
             </ul>
 
         </nav>

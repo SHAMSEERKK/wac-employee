@@ -48,8 +48,10 @@
                                                     data-target="#modal-primary">
                                                     edit
                                                 </button>
-                                                <a href="{{ url("delete-departments/$list->id") }}"
-                                                    class="btn deletebtn btn-danger">delete</button>
+                                                
+                                                <a href="{{ url("delete-departments/$list->id") }}" class="btn deletebtn btn-danger">delete</button>
+                                                    
+                                                   
                                             </td>
                                         </tr>
                                     @endforeach

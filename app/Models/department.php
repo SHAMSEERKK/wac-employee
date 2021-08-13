@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class department extends Model
 {
     use HasFactory;
+
+    public function departments()
+    {
+        return $this->hasOne(department::class);
+    }
+   
 }

@@ -18,6 +18,11 @@
   <link rel="stylesheet" href="{{asset('vendors/dist/css/adminlte.min.css')}}">
    <!-- icheck bootstrap -->
    <link rel="stylesheet" href="{{asset('vendors/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+   
+   {{-- yajra data table style --}}
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+  <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -51,6 +56,7 @@
 <script src="{{asset('vendors/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('vendors/dist/js/adminlte.min.js')}}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 {{-- data table plugins --}}
 <script src="{{asset('vendors/plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -68,9 +74,15 @@
 
 {{-- jquery validation plugins --}}
 <script src="{{asset('vendors/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+{{-- yajra datatable  --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 
 {{-- custom script --}}
 @stack('script')
+@stack('js')
 </body>
 </html>
