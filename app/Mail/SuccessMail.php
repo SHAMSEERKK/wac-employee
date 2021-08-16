@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class SuccessMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $details;
 
     /**
      * Create a new message instance.
@@ -18,7 +19,7 @@ class SuccessMail extends Mailable
      */
     public function __construct()
     {
-        //
+        // $this->details = $details;
     }
 
     /**
@@ -28,6 +29,8 @@ class SuccessMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.success-mail');
+        return $this->view('emails.sendmail');
+
+
     }
 }
