@@ -14,8 +14,9 @@
                 <div class="modal-body">
 
 
-                    
-                    <form method="post" id="quickForm" action="{{ url('addDepartmenturl') }}" enctype="multipart/form-data">
+
+                    <form method="post" id="quickForm" action="{{ url('addDepartmenturl') }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
 
@@ -50,7 +51,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <form method="post" id="quickForm" action="{{ url('addDepartmenturl') }}" enctype="multipart/form-data">
+                    <form method="post" id="quickForm" action="{{ url('addDepartmenturl') }}"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
 

@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>employee| Log in</title>
+    <title>employee| Login</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -69,7 +69,7 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                                                 document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 

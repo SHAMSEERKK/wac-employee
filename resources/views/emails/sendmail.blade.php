@@ -4,37 +4,26 @@
 
 <head>
 
-    <title>Success Mail </title>
+    <title>welcome to employeeinfo </title>
+
 
 </head>
 
 <body>
 
 
-<p>Hi</p>
+    <p>Hi</p>
+
+    <p>Welcome to employeeinfo! Thanks so much for joining us. You’re on your way to super-employee and beyond!</p>
 
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-   
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 
 
- 
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+
+    <strong>Cheerfully yours,
+        The employeeinfo Team</strong> 
 
 
- 
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-  
-
-<strong>Thank you Sir. :)</strong>
-
-  
 
 </body>
 

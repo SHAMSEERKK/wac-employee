@@ -119,7 +119,7 @@
                                 <input type="text" id="designation_name" name="designation_name" class="form-control">
                             </div>
 
-                            <button class="btn btn-primary submit-btn"  id="update-form"> update</button>
+                            <button class="btn btn-primary submit-btn" id="update-form"> update</button>
                         </form>
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -143,8 +143,8 @@
 
                 $('.submit-btn').click(function() {
                     let form = $(this).closest('form')[0]
-         
-                    $('#'+form.id).validate({
+
+                    $('#' + form.id).validate({
                         rules: {
                             designation_name: {
                                 required: true,

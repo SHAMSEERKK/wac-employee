@@ -2,25 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendEmailJob;
-use App\Models\department;
-use App\Models\designation;
-use App\Models\employee;
+use App\Models\Department;
+use App\Models\Designation;
+use App\Models\Employee;
+use App\Repositories\Employ\BaseRepository;
 use DataTables;
 use Illuminate\Http\Request;
 
+
 class EmployeesController extends Controller
 {
+    public $repository;
+    public function __construct(BaseRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    //yajra data table
     public function index(Request $request)
     {
 
         if ($request->ajax()) {
-            $data = employee::select('*');
+            $data = Employee::select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('department', function ($row) {
@@ -34,17 +42,18 @@ class EmployeesController extends Controller
                 ->addColumn('photos', function ($row) {
                     if (!empty($row->photo)) {
                         $src = asset('storage/employee/images/' . $row->photo);
-                        return "<img src=$src width='50px'>";
+                        return "<img src=$src height='60px' width='60px'>";
                     }
-                    return ("no image");
+                    $src = asset('storage/employee/images/default/default_img.png');
+                    return "<img src=$src height='60px' width='60px'>";
 
                 })
 
                 ->addColumn('action', function ($row) {
 
-                    $btn = '<a href="employee-edit/' . $row->id . '" class="edit btn btn-primary btn-sm">edit</a>';
+                    $btn = '<a href="employee-edit/' . $row->id . '" class="edit btn btn-primary btn-sm mr-2 mt-3">edit</a>';
 
-                    $btn = $btn . '<a href="employee-delete/' . $row->id . '" class="edit btn btn-danger btn-sm">delete</a>';
+                    $btn = $btn . '<a href="employee-delete/' . $row->id . '" class="edit btn btn-danger btn-sm mt-3">delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['photos', 'action'])
@@ -74,26 +83,7 @@ class EmployeesController extends Controller
             'address' => 'max:150',
             'mobile_number' => 'required|unique:employees,mobile_number|regex:/^([0-9\s\-\+\(\)]*)$/|min:8|max:16',
         ]);
-
-        $add = new employee;
-        $add->first_name = $request->first_name;
-        $add->last_name = $request->last_name;
-        $add->email = $request->email;
-        $add->password = md5($request->password);
-        $add->departments_id = $request->department;
-        $add->designations_id = $request->designations;
-        if (!empty($request->file('photo'))) {
-            $photo = $this->imageUpload($request->file('photo'));
-            $add->photo = $photo;
-        }
-        $add->address = $request->address;
-        $add->mobile_number = $request->mobile_number;
-        $add->updated_at = time();
-        $add->created_at = time();
-        $add->save();
-
-        // email
-        dispatch(new SendEmailJob($add));
+        $this->repository->create($request);
 
         return redirect('employees');
     }
@@ -115,12 +105,11 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show()
     {
-
-        $employees = employee::all();
-        $departments = department::all();
-        $designations = designation::all();
+        $employees = Employee::all();
+        $departments = Department::all();
+        $designations = Designation::all();
         return view('employees', compact('employees', 'departments', 'designations'));
 
     }
@@ -150,7 +139,6 @@ class EmployeesController extends Controller
             'first_name' => 'required|max:100',
             'last_name' => 'required|max:100',
             'email' => 'required',
-            'password' => 'required',
             'department' => 'required',
             'designations' => 'required',
             'photo' => 'max:5120|mimes:jpeg,png,jpg,svg',
@@ -158,23 +146,8 @@ class EmployeesController extends Controller
             'mobile_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8|max:16',
 
         ]);
+        $this->repository->update($request);
 
-        $update = employee::findOrFail($request->id);
-        $update->first_name = $request->first_name;
-        $update->last_name = $request->last_name;
-        $update->email = $request->email;
-        $update->password = $request->password;
-        $update->departments_id = $request->department;
-        $update->designations_id = $request->designations;
-        if (!empty($request->file('photo'))) {
-            $photo = $this->imageUpload($request->file('photo'));
-            $update->photo = $photo;
-        }
-        $update->address = $request->address;
-        $update->mobile_number = $request->mobile_number;
-        $update->updated_at = time();
-        $update->created_at = time();
-        $update->save();
         return redirect('employees');
     }
 
@@ -186,30 +159,22 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        $data = employee::findOrFail($id);
-        $data->delete();
+        $this->repository->destroy($id);
         return redirect('employees');
     }
     public function dropDown()
     {
-        $departments = department::all();
-        $designations = designation::all();
+
+        $departments = Department::all();
+        $designations = Designation::all();
         return view('addemployee', compact('departments', 'designations'));
     }
-    public function imageUpload($image)
-    {
-        $destinationPath = 'storage/employee/images';
-        $employeeImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-        $image->move($destinationPath, $employeeImage);
 
-        return $employeeImage;
-    }
-
-    public function getEdit(Request $req)
+    public function getEdit(Request $request)
     {
-        $departments = department::all();
-        $designations = designation::all();
-        $employee = employee::findOrFail($req->id);
+        $departments = Department::all();
+        $designations = Designation::all();
+        $employee = Employee::findOrFail($request->id);
         return view('employee-edit', compact('employee', 'departments', 'designations'));
     }
 

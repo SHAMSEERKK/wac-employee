@@ -48,10 +48,11 @@
                                                     data-target="#modal-primary">
                                                     edit
                                                 </button>
-                                                
-                                                <a href="{{ url("delete-departments/$list->id") }}" class="btn deletebtn btn-danger">delete</button>
-                                                    
-                                                   
+
+                                                <a href="{{ url("delete-departments/$list->id") }}"
+                                                    class="btn deletebtn btn-danger">delete</button>
+
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -84,7 +85,7 @@
                             </div>
 
                             <button class="btn btn-primary submit-btn"> Add </button>
-                         
+
                         </form>
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -121,7 +122,7 @@
                         </form>
                     </div>
                     <div class="modal-footer justify-content-between">
-             
+
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -140,7 +141,7 @@
 
                 $('.submit-btn').click(function() {
                     let form = $(this).closest('form')[0]
-                    $('#'+form.id).validate({
+                    $('#' + form.id).validate({
                         rules: {
                             department_name: {
                                 required: true,
@@ -169,7 +170,7 @@
 
 
                 $('.edit').click(function() {
-           
+
                     $('#department_id').val($(this).attr('data-id'));
                     $('#department_name').val($(this).attr('data-name'));
 
@@ -177,10 +178,10 @@
 
 
                 $('#update-form').click(function() {
-             
+
                     console.log($('#department_id').val());
                     console.log($('#department_name').val());
-        
+
                 });
 
 

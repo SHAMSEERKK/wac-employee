@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\department;
-use App\Models\designation;
+use App\Models\Department;
+use App\Models\Designation;
 use Illuminate\Http\Request;
 
 
@@ -15,14 +15,14 @@ class EmployeeController extends Controller
             'department_name' => 'required|max:15|unique:departments,name',
         ]);
 
-        $add = new department;
+        $add = new Department;
         $add->name = $req->department_name;
         $add->save();
         return redirect('departments');
     }
     public function show()
     {
-        $data = department::all();
+        $data = Department::all();
         return view('departments', ['lists' => $data]);
     }
 
@@ -30,10 +30,10 @@ class EmployeeController extends Controller
     {  
 
         $validated = $req->validate([
-            'department_name' => 'required|unique:departments,name',
+            'department_name' => 'required',
         ]);
 
-        $new_data = department::find($req->department_id);
+        $new_data = Department::find($req->department_id);
         $new_data->name = $req->department_name;
         $new_data->updated_at = time();
         $new_data->save();
@@ -42,11 +42,11 @@ class EmployeeController extends Controller
     }
     public function deleteDepartment($id)
     {
-        $data = department::findOrFail($id);
+        $data = Department::findOrFail($id);
         try{
             $data->delete();
         }catch(\exception $e){
-            return redirect('departments')->withErrors('OOPS..! Employee with department exist'); }
+            return redirect('departments')->withErrors('OOPS..! Employee with Department exist'); }
         
             return redirect('departments');
     }
@@ -59,14 +59,14 @@ class EmployeeController extends Controller
             'designation_name' => 'required|unique:designations,name',
         ]);
 
-        $add_designation = new designation;
+        $add_designation = new Designation;
         $add_designation->name = $req->designation_name;
         $add_designation->save();
         return redirect('designations');
     }
     public function showDesignation()
     {
-        $data = designation::all();
+        $data = Designation::all();
         return view('designations', ['lists' => $data]);
     }
 
@@ -74,10 +74,10 @@ class EmployeeController extends Controller
     {
 
         $validated = $req->validate([
-            'designation_name' => 'required|unique:designations,name',
+            'designation_name' => 'required',
         ]);
 
-        $new_data = designation::find($req->designation_id);
+        $new_data = Designation::find($req->designation_id);
         $new_data->name = $req->designation_name;
         $new_data->updated_at = time();
         $new_data->save();
@@ -87,11 +87,11 @@ class EmployeeController extends Controller
     public function deleteDesignation($id)
     {
 
-        $data = designation::findOrFail($id);
+        $data = Designation::findOrFail($id);
         try{
             $data->delete();
         }catch(\exception $e){
-            return redirect('designations')->withErrors('OOPS..! Employee with designations exist'); }
+            return redirect('designations')->withErrors('OOPS..! Employee with Designations exist'); }
         
         return redirect('designations');
     }

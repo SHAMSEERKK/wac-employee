@@ -13,17 +13,16 @@
 
 
                     @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     <div class="card-body">
-
                         <form method="post" action="{{ url('employees-add') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -45,26 +44,26 @@
                                 <input type="password" name="password" class="form-control">
                             </div>
 
-                                <div class="form-group">
-                                    <label for="departments">departments:</label>
-                                    <select name="department" class="form-control" >
-                                        <option value="">select</option>
-                                        @foreach($departments as $department)
-                                            <option value="{{$department->id}}">{{$department->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            
-                                <div class="form-group">
-                                    <label for="designations">designations:</label>
-                                    <select name="designations" class="form-control" >
-                                        <option value="">select</option>
-                                        @foreach($designations as $designation)
-                                            <option value="{{$designation->id}}">{{$designation->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                        
+                            <div class="form-group">
+                                <label for="departments">Department</label>
+                                <select name="department" class="form-control">
+                                    <option value="">select</option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="designations">Designation</label>
+                                <select name="designations" class="form-control">
+                                    <option value="">select</option>
+                                    @foreach ($designations as $designation)
+                                        <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
 
                             <div class="form-group">
                                 <label for="photo">Photo</label>
@@ -73,23 +72,20 @@
 
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" name="address" class="form-control">
+                                <textarea name="address" class="form-control"></textarea>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="mobile_number">Mobile Number</label>
-                                <input type="number" name="mobile_number" class="form-control">
+                                <input type="" name="mobile_number" class="form-control">
                             </div>
-                            
+
                             <button class="btn btn-primary"> Add </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-      
+
 
     @endsection
-
-    
-

@@ -5,6 +5,9 @@ use  App\Http\Controllers\EmployeeController;
 use  App\Http\Controllers\TestController;
 use App\Http\Controllers\EmployeesController;
 
+use Illuminate\Support\Facades\Mail;
+
+
 
 //home
 Route::get('/', function () {
@@ -46,9 +49,13 @@ Route::post('employee-update',[EmployeesController::class,'update']);
 Route::get('employee-delete/{id}', [EmployeesController::class,'destroy']);
 Route::get('empdatatable', [EmployeesController::class, 'index'])->name('empdatatable.index');
 
-// succesMail
-// Route::get('email-success', function(){
-//     $details['email'] = 'rahees@webandcrafts.in';
-//     dispatch(new App\Jobs\SendEmailJob($details));
 
-//     });
+
+
+
+
+
+
+
+
+
