@@ -3,9 +3,10 @@ namespace App\Repositories\Employ;
 
 use App\Jobs\SendEmailJob;
 use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Employee;
 
-class BaseRepository
+class EmployeeRepository
 {
 
     public function create($request)
@@ -68,5 +69,13 @@ class BaseRepository
         $image->move($destinationPath, $employeeImage);
         return $employeeImage;
     }
+    public function getEdit($request)
+    {
+        $departments = Department::all();
+        $designations = Designation::all();
+        $employee = Employee::findOrFail($request->id);
+       
+    }
+
 
 }

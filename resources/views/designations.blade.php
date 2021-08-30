@@ -171,7 +171,7 @@
                 })
 
 
-
+                //model get data for edit
                 $('.edit').click(function() {
 
                     $('#designation_id').val($(this).attr('data-id'));
@@ -179,21 +179,13 @@
 
                 });
 
-
+                //update
                 $('#update-form').click(function() {
 
                     console.log($('#designation_id').val());
                     console.log($('#designation_name').val());
 
                 });
-
-
-
-
-
-
-
-
             });
         </script>
     @endpush

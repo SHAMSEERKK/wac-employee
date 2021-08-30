@@ -17,7 +17,7 @@
                             </div>
                         </form>
                         <div class="form-group" style="width: 50%">
-                            <a href="{{ url('addemployeeurl') }}"> <button class="btn btn-primary mb-4">Add
+                            <a href="{{ url('add-employeeurl') }}"> <button class="btn btn-primary mb-4">Add
                                     Employee</button>
                             </a>
                         </div>

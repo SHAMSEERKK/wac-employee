@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
-use App\Repositories\Employ\BaseRepository;
+use App\Repositories\Employ\EmployeeRepository;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class EmployeesController extends Controller
 {
     public $repository;
-    public function __construct(BaseRepository $repository)
+    public function __construct(EmployeeRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -81,7 +81,7 @@ class EmployeesController extends Controller
             'designations' => 'required',
             'photo' => 'max:5120|mimes:jpeg,png,jpg,svg',
             'address' => 'max:150',
-            'mobile_number' => 'required|unique:employees,mobile_number|regex:/^([0-9\s\-\+\(\)]*)$/|min:8|max:16',
+            'mobile_number' => 'unique:employees,mobile_number',
         ]);
         $this->repository->create($request);
 
@@ -176,6 +176,7 @@ class EmployeesController extends Controller
         $designations = Designation::all();
         $employee = Employee::findOrFail($request->id);
         return view('employee-edit', compact('employee', 'departments', 'designations'));
+      
     }
 
 }

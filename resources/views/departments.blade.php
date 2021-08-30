@@ -76,7 +76,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <form method="post" id="quickForm" action="{{ url('addDepartmenturl') }}">
+                        <form method="post" id="quickForm" action="{{ url('add-departmenturl') }}">
                             @csrf
 
                             <div class="form-group">

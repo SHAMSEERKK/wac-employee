@@ -10,8 +10,7 @@
                     <div class="card-header">
                         <h5 class="title"> edit employee </h5>
                     </div>
-
-                    @if ($errors->any())
+                    {{-- @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -19,11 +18,12 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif
+                    @endif --}}
 
                     <div class="card-body">
 
-                        <form method="post" action="{{ url('employee-update') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ url('employee-update') }}" enctype="multipart/form-data"
+                            id="Editform">
                             @csrf
                             <div class="form-group">
                                 <label for="first_name">First Name</label>
@@ -75,7 +75,7 @@
                                 <label for="photo">Photo</label>
                                 <input type="file" class=" form-control" style="position: initial;opacity: 1"
                                     name="photo" />
-                                @if (!empty($employee->photo)) {
+                                @if (!empty($employee->photo))
                                     <img src="../storage/employee/images/{{ $employee['photo'] }}" height="50"
                                         width="50" />
                                 @else
@@ -103,6 +103,64 @@
                 </div>
             </div>
         </div>
-
-
     @endsection
+
+    {{-- jquery validation --}}
+    @push('script')
+
+        <script>
+            $(document).ready(function() {
+                $('#Editform').validate({
+                    rules: {
+                        first_name: {
+                            required: true,
+                            maxlength: 100,
+                        },
+                        last_name: {
+                            required: true,
+                            maxlength: 100,
+                        },
+                        email: "required",
+                        department: "required",
+                        designations: "required",
+                        address: {
+                            maxlength: 150,
+                        },
+                        mobile_number: {
+                            required: true,
+                            digits: true,
+                            minlength: 8,
+                            maxlength: 16,
+                        }
+
+                    },
+                    messages: {
+                        first_name: "First name is required",
+                        last_name: "Last name is required",
+                        email: "Email is required",
+                        department: "department is required",
+                        designations: "designation is required",
+
+                        address: "maximum 150 words",
+                        mobile_number: {
+                            required: 'mobile number is required',
+                            digits: "mobile number enter in digits",
+                            minlength: "mobile number mustly minimum 8 digits",
+                            maxlength: "mobile number maximum only 16 digits",
+                        }
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function(error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function(element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function(element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                    }
+                });
+            });
+        </script>
+    @endpush
